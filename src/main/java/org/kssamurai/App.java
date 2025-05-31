@@ -7,10 +7,8 @@ import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragGestureEvent;
 import java.awt.dnd.DragGestureListener;
 import java.awt.dnd.DragSource;
-import java.awt.dnd.DragSourceDragEvent;
+import java.awt.dnd.DragSourceAdapter;
 import java.awt.dnd.DragSourceDropEvent;
-import java.awt.dnd.DragSourceEvent;
-import java.awt.dnd.DragSourceListener;
 import javax.swing.*;
 
 /**
@@ -61,7 +59,7 @@ public final class App extends JFrame implements DragGestureListener {
         String text = textArea.getSelectedText();
         if (text != null && !text.isEmpty()) {
             StringSelection ss = new StringSelection(text);
-            ds.startDrag(dge, DragSource.DefaultCopyDrop, ss, new DragSourceListener() {
+            ds.startDrag(dge, DragSource.DefaultCopyDrop, ss, new DragSourceAdapter() {
 
                 @Override
                 @SuppressWarnings(value = { "EmptyBlock" })
@@ -70,22 +68,6 @@ public final class App extends JFrame implements DragGestureListener {
                         // I do not want to remove the text from the source
                         // textArea.replaceSelection("");
                     }
-                }
-
-                @Override
-                public void dragEnter(DragSourceDragEvent e) {
-                }
-
-                @Override
-                public void dragExit(DragSourceEvent e) {
-                }
-
-                @Override
-                public void dragOver(DragSourceDragEvent e) {
-                }
-
-                @Override
-                public void dropActionChanged(DragSourceDragEvent e) {
                 }
 
             });
